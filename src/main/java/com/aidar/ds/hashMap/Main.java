@@ -9,12 +9,21 @@ public class Main {
         map.put("One", 1);
         map.put("AAA", 3);
         System.out.println(map.get("One"));
+        System.out.println(map.size());
+        map.remove("One");
+        System.out.println(map.get("One"));
+        System.out.println(map.isEmpty());
+        System.out.println(map.size());
     }
 }
 
 interface Map<K, V> {
     void put(K key, V value);
     V get(K key);
+    void remove(K key);
+
+    int size();
+    boolean isEmpty();
 }
 
 class KeyValuePair<K, V> {
@@ -60,6 +69,28 @@ class MyHashMap<K, V> implements Map<K, V> {
             return entry.value;
         }
         return null;
+    }
+
+    @Override
+    public void remove(K key) {
+        int hash = getHash(key);
+        for (KeyValuePair<K, V> entry: hashTable[hash]) {
+            if (entry.key.equals(key)) {
+                hashTable[hash].remove(entry);
+                mapSize--;
+                return;
+            }
+        }
+    }
+
+    @Override
+    public int size() {
+        return mapSize;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return mapSize <= 0;
     }
 
     private KeyValuePair<K, V> getEntry(K key) {
