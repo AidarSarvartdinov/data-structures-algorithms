@@ -101,6 +101,40 @@ class LinkedList<T> {
         return node.value;
     }
 
+    public void set(T element, int index) {
+        Node node;
+        if (index <= this.size - index - 1) {
+            node = this.start;
+            for (int i = 0; i != index; i++) {
+                node = node.successor;
+            }
+        } else {
+            node = this.end;
+            for (int i = this.size-1; i != index; i--) {           
+                node = node.predecessor;
+            }
+        }
+        Node newNode = new Node(element);
+        
+        if (this.size == 1) {
+            this.start = newNode;
+            this.end = newNode;
+        } else {
+            if (index == 0) {
+                this.start = newNode;
+                this.start.setSuccessor(node.successor);
+            } else if (index == this.size - 1) {
+                this.end = newNode;
+                node.predecessor.setSuccessor(newNode);
+            } else {
+                newNode.setSuccessor(node.successor);
+                node.predecessor.setSuccessor(newNode);
+                
+            }
+            
+        }
+    }
+
     public String toString() {
         if (this.size == 0) return "[]";
         String res = "[";
