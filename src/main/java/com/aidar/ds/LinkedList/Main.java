@@ -2,23 +2,7 @@ package com.aidar.ds.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        LinkedList<Integer> l = new LinkedList<>();
-        // l.add(1);
-        // l.remove(0);
-        l.add(2);
-        l.add(3);
-        l.remove(1);
-        System.out.println(l.get(1));
-        // l.add(4);
-        // l.add(5);
-        // l.add(6);
-        // l.add(7);
-        // System.out.println(l.get(4));
-        // l.remove(4);
-        // l.remove(2);
-        // System.out.println(l);
-
-
+        
     }
 }
 
@@ -55,6 +39,32 @@ class LinkedList<T> {
         this.end = node;
 
         this.size += 1;
+    }
+
+    public void addAtIndex(T element, int index) {
+        Node node;
+        if (index <= this.size - index - 1) {
+            node = this.start;
+            for (int i = 0; i != index; i++) {
+                node = node.successor;
+            }
+        } else {
+            node = this.end;
+            for (int i = this.size-1; i != index; i--) {           
+                node = node.predecessor;
+            }
+        }
+        
+        Node newNode = new Node(element);
+        if (index == 0) {
+            this.start = newNode;
+            newNode.setSuccessor(node);
+        } else {
+            node.predecessor.setSuccessor(newNode);
+            newNode.setSuccessor(node);
+        }
+        this.size += 1;
+        
     }
 
     public T get(int index) {

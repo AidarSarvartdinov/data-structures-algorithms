@@ -67,4 +67,20 @@ public class LinkedListTest {
         assertEquals(list.get(2).intValue(), 20);
     }
 
+    @Test
+    public void addAtIndex() {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        list.addAtIndex(10, 1);
+        assertEquals(list.get(1).intValue(), 10);
+        assertEquals(list.get(2).intValue(), 2);
+
+        list.addAtIndex(5, 0);
+        assertEquals(list.get(0).intValue(), 5);
+        assertEquals(list.get(1).intValue(), 1);
+        assertEquals(list.get(4).intValue(), 3);
+    }
+
 }
