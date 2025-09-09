@@ -3,18 +3,20 @@ package com.aidar.ds.LinkedList;
 public class Main {
     public static void main(String[] args) {
         LinkedList<Integer> l = new LinkedList<>();
-        l.add(1);
-        l.remove(0);
+        // l.add(1);
+        // l.remove(0);
         l.add(2);
         l.add(3);
-        l.add(4);
-        l.add(5);
-        l.add(6);
-        l.add(7);
-        System.out.println(l.get(4));
-        l.remove(4);
-        l.remove(2);
-        System.out.println(l);
+        l.remove(1);
+        System.out.println(l.get(1));
+        // l.add(4);
+        // l.add(5);
+        // l.add(6);
+        // l.add(7);
+        // System.out.println(l.get(4));
+        // l.remove(4);
+        // l.remove(2);
+        // System.out.println(l);
 
 
     }
@@ -133,6 +135,10 @@ class LinkedList<T> {
             }
             
         }
+    }
+
+    public int size() {
+        return this.size;
     }
 
     public String toString() {
