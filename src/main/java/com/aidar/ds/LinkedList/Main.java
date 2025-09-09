@@ -4,14 +4,19 @@ public class Main {
     public static void main(String[] args) {
         LinkedList<Integer> l = new LinkedList<>();
         l.add(1);
+        l.remove(0);
         l.add(2);
         l.add(3);
         l.add(4);
         l.add(5);
         l.add(6);
         l.add(7);
-        System.out.println(l.get(6));
         System.out.println(l.get(4));
+        l.remove(4);
+        l.remove(2);
+        System.out.println(l);
+
+
     }
 }
 
@@ -32,7 +37,9 @@ class LinkedList<T> {
 
         void setSuccessor(Node successor) {
             this.successor = successor;
-            successor.predecessor = this;
+            if (successor != null) {
+                successor.predecessor = this;
+            }
         }
     }
 
@@ -40,7 +47,6 @@ class LinkedList<T> {
         Node node = new Node(element);
         if (this.start == null) {
             this.start = node;
-            this.end = node;
         } else {
             this.end.setSuccessor(node);
         }
@@ -63,6 +69,49 @@ class LinkedList<T> {
             }
         }
         return node.value;
+    }
+
+    public T remove(int index) {
+        Node node;
+        if (index == 0) {
+            node = this.start;
+            if (this.size > 1) {
+                this.start = this.start.successor;
+                this.start.predecessor = null;
+            } else {
+                this.start = null;
+                this.end = null;
+            }
+        } else {
+            if (index <= this.size - index - 1) {
+                node = this.start;
+                for (int i = 0; i != index; i++) {
+                    node = node.successor;
+                }
+            } else {
+                node = this.end;
+                for (int i = this.size-1; i != index; i--) {           
+                    node = node.predecessor;
+                }
+            }
+            node.predecessor.setSuccessor(node.successor);
+        }
+        
+        this.size -= 1;
+        return node.value;
+    }
+
+    public String toString() {
+        if (this.size == 0) return "[]";
+        String res = "[";
+        Node node = this.start;
+        res += node.value;
+        for (int i = 0; i < this.size - 1; i++) {
+            node = node.successor;
+            res += ", " + node.value;
+        }
+
+        return res + "]";
     }
 
 }
