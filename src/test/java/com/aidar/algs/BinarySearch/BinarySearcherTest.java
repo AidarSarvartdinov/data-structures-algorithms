@@ -24,4 +24,19 @@ public class BinarySearcherTest {
 
     }
 
+    @Test
+    public void findMinInTheRotatedSortedTest() {
+        int[] arr = {5, 6, 1, 2, 3, 4};
+        assertEquals(BinarySearcher.findMinInRotatedSorted(arr), 1);
+
+        int[] arr2 = {1, 2, 3, 4, 5, 6, 7};
+        assertEquals(BinarySearcher.findMinInRotatedSorted(arr2), 1);
+
+        int[] arr3 = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 1};
+        assertEquals(BinarySearcher.findMinInRotatedSorted(arr3), 1);
+
+        int[] arr4 = {1};
+        assertEquals(BinarySearcher.findMinInRotatedSorted(arr4), 1);
+    }
+
 }
